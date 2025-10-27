@@ -124,24 +124,24 @@ Perform actions with a growing list of integrations:
 
 ```mermaid
 graph TD
-    subgraph "User Interface"
+    subgraph User_Interface
         A[Next.js Client]
     end
 
-    subgraph "Backend (Next.js Server)"
+    subgraph Backend_(Next.js_Server)
         B[API Routes & tRPC]
         C[Workflow Engine (Ingest)]
         D[WebSockets Server]
     end
 
-    subgraph "Core Infrastructure"
+    subgraph Core_Infrastructure
         E[Neon DB (Postgres)]
         F[Better Auth]
         G[Polar (Payments)]
         H[Sentry (Monitoring)]
     end
 
-    subgraph "External Integrations"
+    subgraph External_Integrations
         I[Google Forms]
         J[Stripe]
         K[OpenAI / Gemini / Claude]
@@ -149,25 +149,25 @@ graph TD
         M[Generic Webhooks/APIs]
     end
 
-    A -- "tRPC Calls" --> B;
-    A -- "WebSocket Connection" --> D;
+    A -->|tRPC Calls| B
+    A -->|WebSocket Connection| D
 
-    B -- "Invoke Workflow" --> C;
-    C -- "Job Status" --> D;
-    D -- "Real-time Updates" --> A;
+    B -->|Invoke Workflow| C
+    C -->|Job Status| D
+    D -->|Real-time Updates| A
 
-    B -- "DB Queries (Prisma)" --> E;
-    B -- "Auth Checks" --> F;
-    B -- "Payment Actions" --> G;
-    B -- "Error Logging" --> H;
-    C -- "Error Logging" --> H;
+    B -->|DB Queries (Prisma)| E
+    B -->|Auth Checks| F
+    B -->|Payment Actions| G
+    B -->|Error Logging| H
+    C -->|Error Logging| H
 
-    C -- "API Calls" --> K;
-    C -- "Send Messages" --> L;
-    C -- "HTTP Requests" --> M;
+    C -->|API Calls| K
+    C -->|Send Messages| L
+    C -->|HTTP Requests| M
 
-    I -- "Webhook" --> B;
-    J -- "Webhook" --> B;
+    I -->|Webhook| B
+    J -->|Webhook| B
 ```
 
 ### Sample Workflow Execution Flow
