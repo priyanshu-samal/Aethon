@@ -135,18 +135,18 @@ graph TD
     end
 
     subgraph infra["Core Infrastructure"]
-       E["Neon DB (Postgres)"]
+        E["Neon DB (Postgres)"]
         F[Better Auth]
-        G[Polar (Payments)]
+        G["Polar (Payments)"]
         H[Sentry (Monitoring)]
     end
 
     subgraph integrations["External Integrations"]
         I[Google Forms]
         J[Stripe]
-        K[OpenAI / Gemini / Claude]
-        L[Discord / Slack]
-        M[Generic Webhooks/APIs]
+        K["OpenAI / Gemini / Claude"]
+        L["Discord / Slack"]
+        M["Generic Webhooks/APIs"]
     end
 
     A -->|tRPC Calls| B
@@ -169,6 +169,7 @@ graph TD
     I -->|Webhook| B
     J -->|Webhook| B
 ```
+
 
 ### Sample Workflow Execution Flow
 
