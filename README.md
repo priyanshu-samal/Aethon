@@ -124,24 +124,24 @@ Perform actions with a growing list of integrations:
 
 ```mermaid
 graph TD
-    subgraph User_Interface
+    subgraph ui["User Interface"]
         A[Next.js Client]
     end
 
-    subgraph Backend_(Next.js_Server)
+    subgraph backend["Backend (Next.js Server)"]
         B[API Routes & tRPC]
         C[Workflow Engine (Ingest)]
         D[WebSockets Server]
     end
 
-    subgraph Core_Infrastructure
+    subgraph infra["Core Infrastructure"]
         E[Neon DB (Postgres)]
         F[Better Auth]
         G[Polar (Payments)]
         H[Sentry (Monitoring)]
     end
 
-    subgraph External_Integrations
+    subgraph integrations["External Integrations"]
         I[Google Forms]
         J[Stripe]
         K[OpenAI / Gemini / Claude]
