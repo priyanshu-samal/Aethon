@@ -128,46 +128,46 @@ graph TD
         A[Next.js Client]
     end
 
-    subgraph Backend_Server["Backend (Next.js Server)"]
-        B[API Routes & tRPC]
-        C[Workflow Engine (Ingest)]
+    subgraph Backend_Server["Backend - Next.js Server"]
+        B[API Routes and tRPC]
+        C[Workflow Engine - Ingest]
         D[WebSockets Server]
     end
 
     subgraph Core_Infrastructure["Core Infrastructure"]
-        E[Neon DB (Postgres)]
+        E[Neon Database - Postgres]
         F[Better Auth]
-        G[Polar (Payments)]
-        H[Sentry (Monitoring)]
+        G[Polar Payments]
+        H[Sentry Monitoring]
     end
 
     subgraph External_Integrations["External Integrations"]
         I[Google Forms]
         J[Stripe]
-        K[OpenAI / Gemini / Claude]
-        L[Discord / Slack]
-        M[Generic Webhooks/APIs]
+        K[OpenAI • Gemini • Claude]
+        L[Discord • Slack]
+        M[Generic Webhooks & APIs]
     end
 
-    A -- tRPC Calls --> B
-    A -- WebSocket Connection --> D
+    A -->|tRPC Calls| B
+    A -->|WebSocket Connection| D
 
-    B -- Invoke Workflow --> C
-    C -- Job Status --> D
-    D -- Real-time Updates --> A
+    B -->|Invoke Workflow| C
+    C -->|Job Status| D
+    D -->|Real-time Updates| A
 
-    B -- DB Queries (Prisma) --> E
-    B -- Auth Checks --> F
-    B -- Payment Actions --> G
-    B -- Error Logging --> H
-    C -- Error Logging --> H
+    B -->|DB Queries (Prisma)| E
+    B -->|Auth Checks| F
+    B -->|Payment Actions| G
+    B -->|Error Logging| H
+    C -->|Error Logging| H
 
-    C -- API Calls --> K
-    C -- Send Messages --> L
-    C -- HTTP Requests --> M
+    C -->|API Calls| K
+    C -->|Send Messages| L
+    C -->|HTTP Requests| M
 
-    I -- Webhook --> B
-    J -- Webhook --> B
+    I -->|Webhook| B
+    J -->|Webhook| B
 
 
 ### Sample Workflow Execution Flow
@@ -177,22 +177,26 @@ This diagram shows how a simple workflow might execute in real-time.
 ```mermaid
 sequenceDiagram
     participant Client
-    participant Aethon_Backend
-    participant Workflow_Engine
+    participant Aethon_Backend as Aethon Backend
+    participant Workflow_Engine as Workflow Engine
     participant OpenAI
     participant Discord
 
     Client->>Aethon_Backend: User triggers workflow manually
     Aethon_Backend->>Workflow_Engine: Enqueue workflow job with data
-    note over Workflow_Engine: Node 1 (Manual Trigger): Processing -> Success
+
+    note over Workflow_Engine: Node 1 (Manual Trigger): Processing → Success
+
     Workflow_Engine->>OpenAI: Analyze and summarize data
-    note over Workflow_Engine: Node 2 (OpenAI): Processing...
+    note over Workflow_Engine: Node 2 (OpenAI): Processing…
     OpenAI-->>Workflow_Engine: Summary received
     note over Workflow_Engine: Node 2 (OpenAI): Success
+
     Workflow_Engine->>Discord: Send summary to channel
-    note over Workflow_Engine: Node 3 (Discord): Processing...
+    note over Workflow_Engine: Node 3 (Discord): Processing…
     Discord-->>Workflow_Engine: Message sent successfully
     note over Workflow_Engine: Node 3 (Discord): Success
+
 ```
 
 ## 🛠️ Core Technologies Powering Aethon
