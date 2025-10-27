@@ -138,7 +138,7 @@ graph TD
         E["Neon DB (Postgres)"]
         F[Better Auth]
         G["Polar (Payments)"]
-        H[Sentry (Monitoring)]
+        H["Sentry (Monitoring)"]
     end
 
     subgraph integrations["External Integrations"]
@@ -169,6 +169,7 @@ graph TD
     I -->|Webhook| B
     J -->|Webhook| B
 ```
+
 
 
 ### Sample Workflow Execution Flow
