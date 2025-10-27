@@ -135,7 +135,7 @@ graph TD
     end
 
     subgraph infra["Core Infrastructure"]
-        E[Neon DB (Postgres)]
+       E["Neon DB (Postgres)"]
         F[Better Auth]
         G[Polar (Payments)]
         H[Sentry (Monitoring)]
