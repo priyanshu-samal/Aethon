@@ -130,7 +130,7 @@ graph TD
 
     subgraph backend["Backend (Next.js Server)"]
         B[API Routes & tRPC]
-        C[Workflow Engine (Ingest)]
+        C["Workflow Engine (Ingest)"]
         D[WebSockets Server]
     end
 
