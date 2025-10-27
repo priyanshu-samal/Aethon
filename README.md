@@ -122,6 +122,7 @@ Perform actions with a growing list of integrations:
 
 ### High-Level Architecture
 
+```mermaid
 graph TD
     subgraph User_Interface["User Interface"]
         A[Next.js Client]
