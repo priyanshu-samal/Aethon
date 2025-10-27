@@ -121,7 +121,7 @@ Perform actions with a growing list of integrations:
 ## 📊 Architecture and Flow Diagrams
 
 ### High-Level Architecture
-mermaid 
+```mermaid 
 graph TD
     subgraph ui["User Interface"]
         A[Next.js Client]
@@ -168,7 +168,7 @@ graph TD
     I -->|Webhook| B
     J -->|Webhook| B
 
-
+```
 
 
 ### Sample Workflow Execution Flow
