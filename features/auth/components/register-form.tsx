@@ -93,7 +93,7 @@ export function RegisterForm() {
                                                 disabled={isPending}
                                                 >
                                                     <Image
-                                                    src="public/github.svg"
+                                                    src="/github.svg"
                                                     alt="GitHub Logo"
                                                     width={20}
                                                     height={20}
@@ -108,7 +108,7 @@ export function RegisterForm() {
                                                 disabled={isPending}
                                                 >
                                                     <Image 
-                                                    src="public/google.svg"
+                                                    src="/google.svg"
                                                     alt="Google Logo"
                                                     width={20}
                                                     height={20}

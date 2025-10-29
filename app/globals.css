@@ -48,13 +48,13 @@
   --foreground: oklch(0.1450 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.1450 0 0);
-  --popover: oklch(1 0 0);
+  --popover: oklch(66.579% 0.00351 16.061);
   --popover-foreground: oklch(0.1450 0 0);
   --primary: oklch(0.2050 0 0);
   --primary-foreground: oklch(0.9850 0 0);
   --secondary: oklch(0.9700 0 0);
   --secondary-foreground: oklch(0.2050 0 0);
-  --muted: oklch(0.9700 0 0);
+  --muted: oklch(73.169% 0.00458 16.264);
   --muted-foreground: oklch(0.5560 0 0);
   --accent: oklch(0.9700 0 0);
   --accent-foreground: oklch(0.2050 0 0);
@@ -62,7 +62,7 @@
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.9220 0 0);
   --input: oklch(0.9220 0 0);
-  --ring: oklch(0.7080 0 0);
+  --ring: oklch(41.749% 0.00131 15.215);
   --chart-1: oklch(0.8100 0.1000 252);
   --chart-2: oklch(0.6200 0.1900 260);
   --chart-3: oklch(0.5500 0.2200 263);
@@ -72,7 +72,7 @@
   --sidebar-foreground: oklch(0.1450 0 0);
   --sidebar-primary: oklch(0.2050 0 0);
   --sidebar-primary-foreground: oklch(0.9850 0 0);
-  --sidebar-accent: oklch(0.9700 0 0);
+  --sidebar-accent: oklch(73.169% 0.00458 16.264);
   --sidebar-accent-foreground: oklch(0.2050 0 0);
   --sidebar-border: oklch(0.9220 0 0);
   --sidebar-ring: oklch(0.7080 0 0);
@@ -219,4 +219,8 @@
 
 .react-flow__node.selected #base-node{
   @apply ring-3 ring-muted-foreground/25 shadow-lg;
+}
+
+[data-slot="sidebar-menu-button"]:hover {
+  @apply bg-muted;
 }
