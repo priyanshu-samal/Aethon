@@ -46,9 +46,31 @@ export const protectedProcedure = baseProcedure.use(async ({
 
 export const premiumProcedure= protectedProcedure.use(
   async({ctx, next})=>{
-    const customer =await polarClient.customers.getStateExternal({
-      externalId:ctx.auth.user.id,
-    })
+    let customer;
+    try {
+      customer = await polarClient.customers.getStateExternal({
+        externalId:ctx.auth.user.id,
+      });
+    } catch (error: any) { // Use 'any' for now to inspect the error object
+      // Check if the error message or response indicates a "ResourceNotFound"
+      const isResourceNotFound = 
+        (error.message && error.message.includes("ResourceNotFound")) ||
+        (error.response && error.response.status === 404) || // Assuming 404 for Not Found
+        (error.response && error.response.data && error.response.data.error === "ResourceNotFound");
+
+      if (isResourceNotFound) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You must have an active subscription to access this resource",
+        });
+      }
+      // If it's a different error, re-throw it as a generic internal server error
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "An unexpected error occurred while checking your subscription. Please try again later or contact support.",
+      });
+    }
+
     if(
       !customer.activeSubscriptions ||
       customer.activeSubscriptions.length ===0
