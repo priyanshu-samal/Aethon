@@ -66,21 +66,18 @@ getMany: protectedProcedure
 
          const[items,totalCount]=await Promise.all([
             prisma.workflow.findMany({
-                where:{userId:ctx.auth.user.id,}
-            }),
-            prisma.workflow.count({
                 skip:(page-1)*pageSize,
                 take:pageSize,
-                where:{userId:ctx.auth.user.id,
-                name:{
-                    contains:search,
-                    mode:"insensitive"
-                },
+                where:{
+                    userId:ctx.auth.user.id,
+                    name:{
+                        contains:search,
+                        mode:"insensitive"
+                    }
                 },
                 orderBy:{
                     updatedAt:"desc"
-                },
-
+                }
             }),
             prisma.workflow.count({
                 where:{
