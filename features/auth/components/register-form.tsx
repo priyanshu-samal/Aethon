@@ -66,7 +66,11 @@ export function RegisterForm() {
                 router.push("/")
             },
             onError: (ctx) => {
-                toast.error(ctx.error.message)
+                if (ctx.error.message.includes("is not a valid email address")) {
+                    toast.error("Invalid email address. Please use a valid email.");
+                } else {
+                    toast.error(ctx.error.message);
+                }
             }
         });
     }

@@ -15,7 +15,7 @@ export const auth = betterAuth({
   plugins:[
     polar({
       client:polarClient,
-      createCoustomers:true,
+      createCustomerOnSignUp: true,
       use:[
         checkout({
           products:[
@@ -24,7 +24,7 @@ export const auth = betterAuth({
               slug:"omen-sandbox",
             }
           ],
-          successUrl:process.env.POLAR_SUCCESS_URL,
+          successUrl: "http://localhost:3000",
           authenticatedUsersOnly:true,
         }),
         portal()
