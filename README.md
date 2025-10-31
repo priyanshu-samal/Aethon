@@ -112,7 +112,7 @@ graph TD
 
     subgraph "Background Processing (Inngest)"
         I -- Executes --> M[Workflow Steps]
-        M -- Calls --> N[External APIs <br/>(Google, OpenAI, Slack...)]
+        M -- Calls --> N["External APIs<br>(Google, OpenAI, Slack...)"]
         I -- Pub/Sub --> E
     end
 
