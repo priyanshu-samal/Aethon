@@ -115,8 +115,16 @@ export function EditorHeader({workflowId}:{workflowId:string}) {
 
   return (
     <header className="flex items-center justify-end p-4">
-      <Button
+     
+      <SidebarTrigger/>
+      <div className='flex flex-row items-center justfy-between gap-x-4 w-full mr-2'>
+           <EditorBreadCrumbs workflowId={workflowId}/>
+           <EditorSaveButton workflowId={workflowId}/>
+
+      </div>
+       <Button
         variant="outline"
+        
         size="icon"
         onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
       >
@@ -124,12 +132,6 @@ export function EditorHeader({workflowId}:{workflowId:string}) {
         <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
         
       </Button>
-      <SidebarTrigger/>
-      <div className='flex flex-row items-center justfy-between gap-x-4 w-full'>
-           <EditorBreadCrumbs workflowId={workflowId}/>
-           <EditorSaveButton workflowId={workflowId}/>
-
-      </div>
 
     </header>
   )

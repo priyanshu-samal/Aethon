@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { AppHeader } from "@/components/app-header";
+import { AppLayout } from "@/components/app-layout";
 import { TRPCReactProvider } from "@/trpc/client";
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
@@ -29,8 +29,7 @@ export default function RootLayout({
             defaultTheme="light"
             enableSystem
           >
-              <AppHeader />
-              {children}
+              <AppLayout>{children}</AppLayout>
               <Toaster/>
           </ThemeProvider>
             </NuqsAdapter>

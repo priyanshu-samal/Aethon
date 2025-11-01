@@ -24,9 +24,7 @@ const page = async ({params}: PageProps) => {
           <main className="flex-1">
             <Editor workflowId={workflowId}/>
           </main>
-          <Editor 
-          workflowId={workflowId}
-          />
+          
           </Suspense>
           </ErrorBoundary>
     </HydrateClient>
