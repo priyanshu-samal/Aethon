@@ -17,14 +17,14 @@ export const useSuspenseWorkflow = () => {
 
 export const useCreateWorkflow= ()=>{
     const trpc=useTRPC();
-    const querryClient=useQueryClient()
+    const queryClient=useQueryClient()
    
 
     return useMutation(
         trpc.Workflow.create.mutationOptions({
             onSuccess: (data) => {
                 toast.success(`Workflow "${data.name}" created`);
-                querryClient.invalidateQueries(
+                queryClient.invalidateQueries(
                     trpc.Workflow.getMany.queryOptions({})
                 )
 
@@ -36,4 +36,23 @@ export const useCreateWorkflow= ()=>{
         })
     )
 
+}
+
+export const useRemoveWorkflow=()=>{
+    const trpc=useTRPC()
+    const queryClient=useQueryClient()
+
+    return useMutation(
+        trpc.Workflow.remove.mutationOptions({
+            onSuccess:(data)=>{
+                toast.success(`Workflow "${data.name}" removed`);
+    queryClient.invalidateQueries(trpc.Workflow.getMany.queryOptions(
+        {}))
+        queryClient.invalidateQueries(
+            trpc.Workflow.getOne.queryFilter({id: data.id})
+        )
+            }
+
+        })
+    )
 }
