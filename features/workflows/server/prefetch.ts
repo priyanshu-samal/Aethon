@@ -10,3 +10,11 @@ export const prefetchWorkflows = (prams:Input)=>{
     
      
 }
+
+export const prefetchWorkflow = (id:string)=>{
+    return prefetch(trpc.Workflow.getOne.queryOptions({id}))
+    
+     
+}
+
+
