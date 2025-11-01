@@ -1,8 +1,17 @@
-import { PlusIcon, SearchIcon } from "lucide-react";
+import { AlertTriangleIcon, Loader2Icon, PackageOpenIcon, PlusIcon, SearchIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { ReactNode } from "react";
 import { Input } from "./ui/input";
+import{
+Empty,
+EmptyContent,
+EmptyDescription,
+EmptyHeader,
+EmptyTitle,
+EmptyMedia
+
+} from "./ui/empty"
 
 type EntityHeaderProps={
   title: string;
@@ -155,3 +164,178 @@ onClick={()=>onPageChange(Math.min(totalPages, page+1))}>
        </div>
     )
 }
+
+interface StateViewProps {
+    message?:string
+}
+
+interface LoadingViewProps extends 
+StateViewProps{
+    entity?: string;
+}
+
+
+export const LoadingView=({
+    
+    message,
+}:LoadingViewProps)=>{
+    return(
+        <div className="flex justify-center items-center h-full flex-1 flex-col gap-y-4">
+            <Loader2Icon className="size-6 animate-spin text-primary"/>
+            {!!(message) &&(
+            <p className="text-sm text-muted-foreground">
+                {message }
+            </p>
+            )}
+
+        </div>
+    )
+
+}
+
+export const ErrorView=({
+    
+    message,
+}:StateViewProps)=>{
+    return(
+        <div className="flex justify-center items-center h-full flex-1 flex-col gap-y-4">
+            <AlertTriangleIcon className="size-6  text-primary"/>
+            {!!(message) &&(
+            <p className="text-sm text-muted-foreground">
+                {message }
+            </p>
+            )}
+
+        </div>
+    )
+
+}
+
+interface EmptyViewProps extends StateViewProps{
+    onNew?:()=> void
+}
+export const EmptyView =({
+    message,
+    onNew,
+
+}:EmptyViewProps)=>{
+    return(
+        <Empty className=" border border-dashed ">
+           <EmptyHeader>
+            <EmptyMedia variant="icon">
+                <PackageOpenIcon/>
+            </EmptyMedia>
+           </EmptyHeader>
+           <EmptyTitle>
+            No items
+           </EmptyTitle>
+           {!!message &&(
+           <EmptyDescription>
+            {message}
+           </EmptyDescription>
+           )}
+           {!!onNew && (
+            <EmptyContent>
+                <Button onClick={onNew}>
+                    Add item
+                </Button>
+            </EmptyContent>
+           )}
+        </Empty>
+    )
+}
+
+
+
+
+//Table below
+interface EmptyStateProps extends StateViewProps {
+    entity?: string;
+}
+
+export const EmptyState = ({
+    entity = "items",
+    message,
+}: EmptyStateProps) => {
+    return (
+        <div className="flex justify-center items-center h-full flex-1 flex-col gap-y-4">
+            <p className="text-sm text-muted-foreground">
+                {message || `No ${entity} found.`}
+            </p>
+        </div>
+    )
+}
+
+interface EntityTableProps {
+    headers: string[];
+    children: React.ReactNode;
+}
+
+import { Table, TableHeader, TableRow, TableHead } from "@/components/ui/table";
+import { cn } from "@/lib/utils";
+
+export const EntityTable = ({
+    headers,
+    children,
+}: EntityTableProps) => {
+    return (
+        <div className="border rounded-md">
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        {headers.map((header) => (
+                            <TableHead key={header}>{header}</TableHead>
+                        ))}
+                    </TableRow>
+                </TableHeader>
+                {children}
+            </Table>
+        </div>
+    )
+}
+
+interface EntityListProps<T>{
+    items: T[]
+    renderItem:(item:T, index: number, )=>React.ReactNode
+    getKey?:(item:T, index: number)=> string| number 
+    emptyView?: React.ReactNode
+    className?:string
+}
+
+export function EntityList<T>({
+    items,
+    renderItem,
+    getKey,
+    emptyView,
+    className,
+
+
+}:EntityListProps <T>){
+    if(items.length===0 && emptyView){
+        return (
+            <div className="flex-1 flex justify-center items-center">
+                <div className="max-w-sm mx-auto">
+                   {emptyView}
+
+                </div>
+
+            </div>
+        )
+    }
+    return(
+        <div className={cn(
+            "flex flex-col gap-y-4",
+            className,
+        )}>
+            {items.map((item, index)=>(
+                <div key={getKey? getKey(item,index): index}>
+                   {renderItem(item,index)}
+                </div>
+            ))}
+
+        </div>
+    )
+}
+
+
+
