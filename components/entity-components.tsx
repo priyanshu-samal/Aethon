@@ -1,7 +1,7 @@
-import { AlertTriangleIcon, Loader2Icon, PackageOpenIcon, PlusIcon, SearchIcon } from "lucide-react";
+import { AlertTriangleIcon, Loader2Icon, MoreVertical, MoreVerticalIcon, PackageOpenIcon, PlusIcon, SearchIcon, Subtitles, TrashIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { Input } from "./ui/input";
 import{
 Empty,
@@ -12,6 +12,22 @@ EmptyTitle,
 EmptyMedia
 
 } from "./ui/empty"
+import{
+ Card,
+ CardContent,
+ CardDescription,
+ CardTitle
+} from "@/components/ui/card"
+import{
+ DropdownMenu,
+ DropdownMenuContent,
+ DropdownMenuItem,
+ DropdownMenuLabel,
+ DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
+
+
+
 
 type EntityHeaderProps={
   title: string;
@@ -337,5 +353,97 @@ export function EntityList<T>({
     )
 }
 
+interface EntityItemsProps{
+    href:string
+    title:string 
+    subtitle?:React.ReactNode
+    image?:React.ReactNode
+    actions?:React.ReactNode
+    onRemove?:()=> void| Promise<void>
+    isRemoving?:boolean,
+    className?:string
+}
 
+export const EntityItem=({
+    href,
+    title,
+    subtitle,
+    image,
+    actions,
+    onRemove,
+    isRemoving,
+    className
+
+}:EntityItemsProps)=>{
+
+    const handleRemove=async (e: React.MouseEvent)=>{
+        e.preventDefault()
+        e.stopPropagation()
+
+        if(isRemoving){
+            return 
+        }
+        if(onRemove){
+            await onRemove()
+        }
+    }
+
+         return(
+            <Link href={href}>
+              <Card
+              className={cn(
+                "p-4 shadow-none hover:shadow cursor-pointer",
+                isRemoving && "opacity-50 cursor-not-allowed",
+                className,
+              )}
+              >
+                <CardContent className="flex flex-row items-center justify-between p-0">
+                   <div className="flex items-center gap-3">
+                       {image}
+                       <div>
+                        <CardTitle className="text-base font-medium">
+                         {title}
+                        </CardTitle>
+                        {!!subtitle && (
+                            <CardDescription className="text-xs">
+                                {subtitle}
+                            </CardDescription>
+                        )}
+                       </div>
+                   </div>
+                   {(actions || onRemove)&&(
+                    <div className="flex gap-4 items-center">
+                        {actions}
+                        {onRemove &&(
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                       <Button
+                                       size="icon"
+                                       variant="ghost"
+                                       onClick={(e)=>e.stopPropagation()}
+                                       >
+                                        <MoreVerticalIcon className="size-4"/>
+
+                                       </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent
+                                align="end"
+                                onClick={(e)=>e.stopPropagation()}
+                                >
+                                         <DropdownMenuItem onClick={handleRemove}>
+                                            <TrashIcon className="size-4">
+                                                Delete
+                                            </TrashIcon>
+                                         </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        )}
+                    </div>
+                   )}
+                </CardContent>
+
+              </Card>
+            </Link>
+         )
+}
 
