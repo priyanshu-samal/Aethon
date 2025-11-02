@@ -55,7 +55,14 @@ export const Editor=({workflowId}:{workflowId: string})=>{
       >
        <Background/>
        <Controls/>
-       <MiniMap />
+       <MiniMap 
+       nodeColor="#a1a1aa"
+       maskColor="#00000050"
+       style={{
+        backgroundColor:"#00000050",
+        
+       }}
+       />
        <Panel position="top-right">
         <AddNodeButton/>
        </Panel>
