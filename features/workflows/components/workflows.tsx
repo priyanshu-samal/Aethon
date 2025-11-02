@@ -21,7 +21,7 @@ import { useEntitySearch } from "../hooks/use-entity-search";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import Link from "next/link";
 
-import type {Workflow} from "@/generated/prisma"
+import type { Workflow } from "@/generated";
 import { WorkflowIcon } from "lucide-react";
 import{
     formatDistanceToNow
