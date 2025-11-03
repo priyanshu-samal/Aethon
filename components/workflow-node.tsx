@@ -8,7 +8,7 @@ import { Button } from "./ui/button"
 
 interface WorkflowNodeProps{
     children:ReactNode,
-    showToolbar?:()=> void
+    showToolbar?:boolean
     onDelete?:()=> void
     onSetting?:()=> void
     name?: string
@@ -17,7 +17,7 @@ interface WorkflowNodeProps{
 
 export function WorkflowNode({
     children,
-    showToolbar,
+    showToolbar = true,
     onDelete,
     onSetting,
     name,
@@ -28,11 +28,11 @@ export function WorkflowNode({
         {showToolbar && (
             <NodeToolbar>
                 <Button size="sm" variant="ghost" onClick={onSetting}>
-                    <SettingsIcon className="size-4"/>
+                    <SettingsIcon className="size-4 text-white"/>
 
                 </Button>
                        <Button size="sm" variant="ghost" onClick={onDelete}>
-                    <TrashIcon className="size-4"/>
+                    <TrashIcon className="size-4 text-white"/>
                     
                 </Button>
             </NodeToolbar>
@@ -45,7 +45,7 @@ export function WorkflowNode({
            className="max-w-[200px] text-center"
            >
 
-           <p className="font-medium">
+           <p className="font-medium text-white">
             {name}
             </p>
             {description &&(
